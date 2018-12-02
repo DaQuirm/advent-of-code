@@ -20,3 +20,22 @@ day02a ids = n * m
     inner sets             _               = sets
 
     initMem = (fromList ['a'..'z'], empty, empty, empty)
+
+day02b :: [String] -> String
+day02b ids = common $ head $ filter f ((,) <$> ids <*> ids)
+  where
+    f = go 0
+    go n ([], []) = toEnum n
+    go 0 ((x:xs), (y:ys)) | x /= y    = go 1 (xs, ys)
+    go n ((x:xs), (y:ys)) | x == y    = go n (xs, ys)
+                          | otherwise = False
+
+    common = (fst <$>) . filter (uncurry (==)) . uncurry zip
+
+    {-
+      or, more readable:
+
+      common ([], []) = []
+      common ((x:xs), (y:ys)) | x == y    = x : common (xs, ys)
+                              | otherwise = common (xs, ys)
+    -}
