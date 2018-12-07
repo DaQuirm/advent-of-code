@@ -1,8 +1,8 @@
 module Main where
 
-import Solutions.Day02 (day02b)
+import Solutions.Day03 (day03b)
 
 main :: IO ()
 main = do
-    input <- lines <$> readFile "./input/input02.txt"
-    print $ day02b input
+  input <- lines <$> readFile "./input/input03.txt"
+  print $ day03b input
